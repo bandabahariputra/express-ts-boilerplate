@@ -14,10 +14,12 @@ apiRouter.get('/', HomeController.welcome);
 apiRouter.post('/api/auth/register', AuthController.register);
 apiRouter.post('/api/auth/login', AuthController.login);
 
-// auth api
-apiRouter.use(auth);
-
+// with authorization api
 // user
-apiRouter.get('/api/users/current', UserController.getCurrentUser);
-apiRouter.patch('/api/users/update', UserController.update);
-apiRouter.post('/api/users/change-password', UserController.changePassword);
+apiRouter.get('/api/users/current', auth, UserController.getCurrentUser);
+apiRouter.patch('/api/users/update', auth, UserController.update);
+apiRouter.post(
+  '/api/users/change-password',
+  auth,
+  UserController.changePassword,
+);
